@@ -19,13 +19,12 @@ const PropertySearch = () => {
     maxBedrooms: "",
     location: "",
     postcode: "",
-    dateAdded: null, 
+    dateAdded: null,
   });
 
   const [filteredProperties, setFilteredProperties] = useState(properties);
   const [currentImages, setCurrentImages] = useState(properties.map(() => 0));
 
-  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImages((prev) =>
@@ -37,7 +36,7 @@ const PropertySearch = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "postcode" && /[^a-zA-Z0-9]/.test(value)) return; 
+    if (name === "postcode" && /[^a-zA-Z0-9]/.test(value)) return;
     setSearchCriteria({ ...searchCriteria, [name]: value });
   };
 
@@ -55,13 +54,23 @@ const PropertySearch = () => {
       } = searchCriteria;
 
       const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
       ];
-      
+
       const propertyAddedDate = new Date(
         property.added.year,
-        months.indexOf(property.added.month), 
+        months.indexOf(property.added.month),
         property.added.day
       );
 
@@ -78,9 +87,10 @@ const PropertySearch = () => {
         (dateAdded ? propertyAddedDate >= dateAdded : true)
       );
     });
-    
+
     setFilteredProperties(filtered);
   };
+
   const toggleFavorite = (property) => {
     if (favorites.some((fav) => fav.id === property.id)) {
       removeFromFavorites(property.id);
@@ -90,128 +100,61 @@ const PropertySearch = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-purple-100 p-6">
+    <div className="min-h-screen bg-gradient-to-bl from-gray-100 to-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-center text-4xl font-bold text-gray-900">
-          Search Your Dream Property
+        <h1 className="text-center text-5xl font-extrabold text-gray-800">
+          Find Your Dream Home
         </h1>
-        <p className="text-center text-gray-600 mt-2 ">
-          Filter properties by type, price, location, and more.
+        <p className="text-center text-lg text-gray-600 mt-3">
+          Tailored property searches just for you.
         </p>
 
         {/* Search Form */}
-        <div className="bg-white p-8 rounded-lg shadow-lg mt-8 max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Property Type */}
-            <div className="form-group">
-              <label className="text-gray-700 font-medium mb-2 block">
-                Property Type
-              </label>
-              <select
-                name="type"
-                value={searchCriteria.type}
-                onChange={handleInputChange}
-                className="w-full p-3 border rounded-md shadow-sm"
-              >
-                <option value="">Any</option>
-                <option value="House">House</option>
-                <option value="Flat">Flat</option>
-              </select>
-            </div>
-
-            {/* Min Price */}
-            <div className="form-group">
-              <label className="text-gray-700 font-medium mb-2 block">
-                Min Price
-              </label>
-              <input
-                type="number"
-                name="minPrice"
-                value={searchCriteria.minPrice}
-                onChange={handleInputChange}
-                placeholder="Enter minimum price"
-                className="w-full p-3 border rounded-md shadow-sm"
-              />
-            </div>
-
-            {/* Max Price */}
-            <div className="form-group">
-              <label className="text-gray-700 font-medium mb-2 block">
-                Max Price
-              </label>
-              <input
-                type="number"
-                name="maxPrice"
-                value={searchCriteria.maxPrice}
-                onChange={handleInputChange}
-                placeholder="Enter maximum price"
-                className="w-full p-3 border rounded-md shadow-sm"
-              />
-            </div>
-
-            {/* Min Bedrooms */}
-            <div className="form-group">
-              <label className="text-gray-700 font-medium mb-2 block">
-                Min Bedrooms
-              </label>
-              <input
-                type="number"
-                name="minBedrooms"
-                value={searchCriteria.minBedrooms}
-                onChange={handleInputChange}
-                placeholder="Enter minimum bedrooms"
-                className="w-full p-3 border rounded-md shadow-sm"
-              />
-            </div>
-
-            {/* Max Bedrooms */}
-            <div className="form-group">
-              <label className="text-gray-700 font-medium mb-2 block">
-                Max Bedrooms
-              </label>
-              <input
-                type="number"
-                name="maxBedrooms"
-                value={searchCriteria.maxBedrooms}
-                onChange={handleInputChange}
-                placeholder="Enter maximum bedrooms"
-                className="w-full p-3 border rounded-md shadow-sm"
-              />
-            </div>
-
-            {/* Location */}
-            <div className="form-group">
-              <label className="text-gray-700 font-medium mb-2 block">
-                Location
-              </label>
-              <input
-                type="text"
-                name="location"
-                value={searchCriteria.location}
-                onChange={handleInputChange}
-                placeholder="Enter location"
-                className="w-full p-3 border rounded-md shadow-sm"
-              />
-            </div>
-
-            {/* Postcode */}
-            <div className="form-group">
-              <label className="text-gray-700 font-medium mb-2 block">
-                Postcode
-              </label>
-              <input
-                type="text"
-                name="postcode"
-                value={searchCriteria.postcode}
-                onChange={handleInputChange}
-                placeholder="Enter postcode"
-                className="w-full p-3 border rounded-md shadow-sm"
-              />
-            </div>
+        <div className="bg-white p-8 rounded-3xl shadow-2xl mt-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { label: "Property Type", type: "select", options: ["House", "Flat"], name: "type" },
+              { label: "Min Price", type: "number", name: "minPrice" },
+              { label: "Max Price", type: "number", name: "maxPrice" },
+              { label: "Min Bedrooms", type: "number", name: "minBedrooms" },
+              { label: "Max Bedrooms", type: "number", name: "maxBedrooms" },
+              { label: "Location", type: "text", name: "location" },
+              { label: "Postcode", type: "text", name: "postcode" },
+            ].map((field) => (
+              <div key={field.name} className="form-group">
+                <label className="text-gray-700 font-semibold mb-2 block">
+                  {field.label}
+                </label>
+                {field.type === "select" ? (
+                  <select
+                    name={field.name}
+                    value={searchCriteria[field.name]}
+                    onChange={handleInputChange}
+                    className="w-full p-3 bg-gray-100 border rounded-xl"
+                  >
+                    <option value="">Any</option>
+                    {field.options.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    value={searchCriteria[field.name]}
+                    onChange={handleInputChange}
+                    placeholder={`Enter ${field.label.toLowerCase()}`}
+                    className="w-full p-3 bg-gray-100 border rounded-xl"
+                  />
+                )}
+              </div>
+            ))}
 
             {/* Date Added */}
             <div className="form-group">
-              <label className="text-gray-700 font-medium mb-2 block">
+              <label className="text-gray-700 font-semibold mb-2 block">
                 Date Added
               </label>
               <DatePicker
@@ -220,7 +163,7 @@ const PropertySearch = () => {
                   setSearchCriteria({ ...searchCriteria, dateAdded: date })
                 }
                 placeholderText="Select date"
-                className="w-full p-3 border rounded-md shadow-sm"
+                className="w-full p-3 bg-gray-100 border rounded-xl"
               />
             </div>
           </div>
@@ -228,20 +171,19 @@ const PropertySearch = () => {
           {/* Search Button */}
           <button
             onClick={handleSearch}
-            className="mt-6 w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg shadow-md"
+            className="mt-6 w-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold py-3 rounded-full shadow-lg transition-transform hover:scale-105"
           >
             Search
           </button>
         </div>
 
         {/* Results Section */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProperties.map((property, index) => (
             <div
               key={property.id}
-              className="relative bg-white rounded-lg shadow-lg overflow-hidden"
+              className="relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
             >
-              {/* Favorite Heart Icon */}
               <div
                 className="absolute top-3 right-3 cursor-pointer z-10"
                 onClick={(e) => {
@@ -256,21 +198,20 @@ const PropertySearch = () => {
                 )}
               </div>
 
-              {/* Property Card */}
               <Link to={`/property/${property.id}`} className="block">
                 <img
                   src={property.images[currentImages[index]]}
                   alt={property.location}
-                  className="w-full h-48 object-cover rounded-md"
+                  className="w-full h-56 object-cover rounded-t-xl"
                 />
                 <div className="p-4">
-                  <h2 className="text-xl font-bold text-gray-800">
+                  <h2 className="text-2xl font-bold text-gray-800">
                     {property.location}
                   </h2>
-                  <p className="text-gray-600 mt-1 line-clamp-2">
+                  <p className="text-gray-600 mt-2 line-clamp-2">
                     {property.description}
                   </p>
-                  <p className="text-blue-600 font-bold mt-3">
+                  <p className="text-blue-500 font-semibold mt-3">
                     Price: Rs.{property.price.toLocaleString()}
                   </p>
                   <p className="text-gray-600">Bedrooms: {property.bedrooms}</p>

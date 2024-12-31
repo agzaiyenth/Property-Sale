@@ -8,15 +8,15 @@ const FavoritesPage = () => {
 
   if (favorites.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-black to-[#0D1F2D] flex items-center justify-center text-white">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-800">No Favorites Yet</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold">No Favorites Yet</h1>
+          <p className="text-gray-400 mt-2">
             Browse properties and add them to your favorites!
           </p>
           <Link
             to="/"
-            className="mt-4 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
+            className="mt-4 inline-block bg-[#005F73] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[#94D2BD] transition"
           >
             Go Back to Home
           </Link>
@@ -26,31 +26,31 @@ const FavoritesPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-purple-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-black to-[#0D1F2D] p-6 text-white">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-center text-4xl font-bold text-gray-900 mb-6">
+        <h1 className="text-center text-4xl font-extrabold mb-6">
           Your Favorites
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {favorites.map((property) => (
             <div
               key={property.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+              className="bg-[#1A2B3C] rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-105"
             >
               <img
                 src={property.images[0]} // Display the first image
                 alt={property.location}
-                className="w-full h-48 object-cover"
+                className="w-full h-56 object-cover"
               />
               <div className="p-4 relative">
-                <h2 className="text-xl font-bold text-gray-800">
-                  {property.location}
-                </h2>
-                <p className="text-gray-600 mt-1">{property.description}</p>
-                <p className="text-blue-600 font-bold mt-2">
+                <h2 className="text-xl font-bold">{property.location}</h2>
+                <p className="text-gray-400 mt-2 line-clamp-2">
+                  {property.description}
+                </p>
+                <p className="text-[#94D2BD] font-semibold mt-3">
                   Price: Rs.{property.price.toLocaleString()}
                 </p>
-                <p className="text-gray-600">Bedrooms: {property.bedrooms}</p>
+                <p className="text-gray-400">Bedrooms: {property.bedrooms}</p>
 
                 {/* Remove from Favorites Button */}
                 <button
@@ -63,7 +63,7 @@ const FavoritesPage = () => {
                 {/* View Details Button */}
                 <Link
                   to={`/property/${property.id}`}
-                  className="mt-4 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition"
+                  className="mt-4 inline-block bg-[#005F73] text-white px-6 py-2 rounded-lg shadow-md hover:bg-[#94D2BD] transition"
                 >
                   View Details
                 </Link>

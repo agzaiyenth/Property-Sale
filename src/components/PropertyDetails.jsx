@@ -21,14 +21,14 @@ const PropertyDetails = () => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Automatically change images every 3 seconds
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex(
         (prevIndex) => (prevIndex + 1) % property.images.length
       );
-    }, 3000); // Adjust the interval as needed
-    return () => clearInterval(interval); // Cleanup the interval
+    }, 3000);
+    return () => clearInterval(interval); 
   }, [property.images.length]);
 
   const toggleFavorite = (property) => {

@@ -38,7 +38,7 @@ const FavoritesPage = () => {
               className="bg-[#1A2B3C] rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-transform transform hover:scale-105"
             >
               <img
-                src={property.images[0]} // Display the first image
+                src={property.images[0]} 
                 alt={property.location}
                 className="w-full h-56 object-cover"
               />

@@ -113,7 +113,12 @@ const PropertySearch = () => {
         <div className="bg-[#1A2B3C] p-8 rounded-3xl shadow-2xl mt-8 max-w-5xl mx-auto text-white">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { label: "Property Type", type: "select", options: ["House", "Flat"], name: "type" },
+              {
+                label: "Property Type",
+                type: "select",
+                options: ["House", "Flat"],
+                name: "type",
+              },
               { label: "Min Price", type: "number", name: "minPrice" },
               { label: "Max Price", type: "number", name: "maxPrice" },
               { label: "Min Bedrooms", type: "number", name: "minBedrooms" },
@@ -178,47 +183,62 @@ const PropertySearch = () => {
         </div>
 
         {/* Results Section */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProperties.map((property, index) => (
-            <div
-              key={property.id}
-              className="relative bg-[#1A2B3C] rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
-            >
-              <div
-                className="absolute top-3 right-3 cursor-pointer z-10"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleFavorite(property);
-                }}
-              >
-                {favorites.some((fav) => fav.id === property.id) ? (
-                  <FilledHeartIcon className="w-8 h-8 text-red-500" />
-                ) : (
-                  <OutlineHeartIcon className="w-8 h-8 text-gray-400" />
-                )}
-              </div>
+        {/* Results Section */}
+        <div className="mt-12">
+          {filteredProperties.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProperties.map((property, index) => (
+                <div
+                  key={property.id}
+                  className="relative bg-[#1A2B3C] rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
+                >
+                  <div
+                    className="absolute top-3 right-3 cursor-pointer z-10"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(property);
+                    }}
+                  >
+                    {favorites.some((fav) => fav.id === property.id) ? (
+                      <FilledHeartIcon className="w-8 h-8 text-red-500" />
+                    ) : (
+                      <OutlineHeartIcon className="w-8 h-8 text-gray-400" />
+                    )}
+                  </div>
 
-              <Link to={`/property/${property.id}`} className="block">
-                <img
-                  src={property.images[currentImages[index]]}
-                  alt={property.location}
-                  className="w-full h-56 object-cover rounded-t-xl"
-                />
-                <div className="p-4">
-                  <h2 className="text-2xl font-bold text-white">
-                    {property.location}
-                  </h2>
-                  <p className="text-gray-400 mt-2 line-clamp-2">
-                    {property.description}
-                  </p>
-                  <p className="text-[#94D2BD] font-semibold mt-3">
-                    Price: Rs.{property.price.toLocaleString()}
-                  </p>
-                  <p className="text-gray-400">Bedrooms: {property.bedrooms}</p>
+                  <Link to={`/property/${property.id}`} className="block">
+                    <img
+                      src={property.images[currentImages[index]]}
+                      alt={property.location}
+                      className="w-full h-56 object-cover rounded-t-xl"
+                    />
+                    <div className="p-4">
+                      <h2 className="text-2xl font-bold text-white">
+                        {property.location}
+                      </h2>
+                      <p className="text-gray-400 mt-2 line-clamp-2">
+                        {property.description}
+                      </p>
+                      <p className="text-[#94D2BD] font-semibold mt-3">
+                        Price: Rs.{property.price.toLocaleString()}
+                      </p>
+                      <p className="text-gray-400">
+                        Bedrooms: {property.bedrooms}
+                      </p>
+                    </div>
+                  </Link>
                 </div>
-              </Link>
+              ))}
             </div>
-          ))}
+          ) : (
+            <div className="text-center text-white mt-8">
+              <h2 className="text-3xl font-bold mb-4">No matches found 😔</h2>
+              <p className="text-gray-400 text-lg">
+                Try adjusting your search filters, or maybe the dream property
+                you're looking for is just around the corner!
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

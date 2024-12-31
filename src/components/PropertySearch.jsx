@@ -100,17 +100,17 @@ const PropertySearch = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-bl from-gray-100 to-gray-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-black to-[#0D1F2D] p-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-center text-5xl font-extrabold text-gray-800">
-          Find Your Dream Home
+        <h1 className="text-center text-5xl font-extrabold text-white">
+          Discover Your Dream Property
         </h1>
-        <p className="text-center text-lg text-gray-600 mt-3">
-          Tailored property searches just for you.
+        <p className="text-center text-lg text-gray-300 mt-3">
+          Find the perfect property tailored to your needs.
         </p>
 
         {/* Search Form */}
-        <div className="bg-white p-8 rounded-3xl shadow-2xl mt-8 max-w-5xl mx-auto">
+        <div className="bg-[#1A2B3C] p-8 rounded-3xl shadow-2xl mt-8 max-w-5xl mx-auto text-white">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { label: "Property Type", type: "select", options: ["House", "Flat"], name: "type" },
@@ -122,7 +122,7 @@ const PropertySearch = () => {
               { label: "Postcode", type: "text", name: "postcode" },
             ].map((field) => (
               <div key={field.name} className="form-group">
-                <label className="text-gray-700 font-semibold mb-2 block">
+                <label className="text-gray-300 font-semibold mb-2 block">
                   {field.label}
                 </label>
                 {field.type === "select" ? (
@@ -130,7 +130,7 @@ const PropertySearch = () => {
                     name={field.name}
                     value={searchCriteria[field.name]}
                     onChange={handleInputChange}
-                    className="w-full p-3 bg-gray-100 border rounded-xl"
+                    className="w-full p-3 bg-gray-800 border rounded-xl text-white"
                   >
                     <option value="">Any</option>
                     {field.options.map((option) => (
@@ -146,7 +146,7 @@ const PropertySearch = () => {
                     value={searchCriteria[field.name]}
                     onChange={handleInputChange}
                     placeholder={`Enter ${field.label.toLowerCase()}`}
-                    className="w-full p-3 bg-gray-100 border rounded-xl"
+                    className="w-full p-3 bg-gray-800 border rounded-xl text-white"
                   />
                 )}
               </div>
@@ -154,7 +154,7 @@ const PropertySearch = () => {
 
             {/* Date Added */}
             <div className="form-group">
-              <label className="text-gray-700 font-semibold mb-2 block">
+              <label className="text-gray-300 font-semibold mb-2 block">
                 Date Added
               </label>
               <DatePicker
@@ -163,7 +163,7 @@ const PropertySearch = () => {
                   setSearchCriteria({ ...searchCriteria, dateAdded: date })
                 }
                 placeholderText="Select date"
-                className="w-full p-3 bg-gray-100 border rounded-xl"
+                className="w-full p-3 bg-gray-800 border rounded-xl text-white"
               />
             </div>
           </div>
@@ -171,7 +171,7 @@ const PropertySearch = () => {
           {/* Search Button */}
           <button
             onClick={handleSearch}
-            className="mt-6 w-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold py-3 rounded-full shadow-lg transition-transform hover:scale-105"
+            className="mt-6 w-full bg-[#005F73] text-white font-bold py-3 rounded-full shadow-lg transition-all duration-300 hover:bg-[#94D2BD] focus:outline-none"
           >
             Search
           </button>
@@ -182,7 +182,7 @@ const PropertySearch = () => {
           {filteredProperties.map((property, index) => (
             <div
               key={property.id}
-              className="relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
+              className="relative bg-[#1A2B3C] rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
             >
               <div
                 className="absolute top-3 right-3 cursor-pointer z-10"
@@ -205,16 +205,16 @@ const PropertySearch = () => {
                   className="w-full h-56 object-cover rounded-t-xl"
                 />
                 <div className="p-4">
-                  <h2 className="text-2xl font-bold text-gray-800">
+                  <h2 className="text-2xl font-bold text-white">
                     {property.location}
                   </h2>
-                  <p className="text-gray-600 mt-2 line-clamp-2">
+                  <p className="text-gray-400 mt-2 line-clamp-2">
                     {property.description}
                   </p>
-                  <p className="text-blue-500 font-semibold mt-3">
+                  <p className="text-[#94D2BD] font-semibold mt-3">
                     Price: Rs.{property.price.toLocaleString()}
                   </p>
-                  <p className="text-gray-600">Bedrooms: {property.bedrooms}</p>
+                  <p className="text-gray-400">Bedrooms: {property.bedrooms}</p>
                 </div>
               </Link>
             </div>
